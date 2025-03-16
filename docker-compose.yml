@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16.8-alpine
+    container_name: encrypt-db
+    restart: always
+    environment:
+        POSTGRES_DB: encrypt
+        POSTGRES_USER: encrypt
+        POSTGRES_PASSWORD: ${DB_PASS}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    driver: local
+
+
