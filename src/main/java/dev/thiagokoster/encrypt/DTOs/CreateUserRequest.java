@@ -1,10 +1,10 @@
-package dev.thiagokoster.encrypt.User;
+package dev.thiagokoster.encrypt.DTOs;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record CreateUserRequestDTO(
+public record CreateUserRequest(
         @NotBlank(message="Username is required")
         String username,
 

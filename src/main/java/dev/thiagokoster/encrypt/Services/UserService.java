@@ -1,6 +1,12 @@
-package dev.thiagokoster.encrypt.User;
+package dev.thiagokoster.encrypt.Services;
 
 import com.password4j.Password;
+import dev.thiagokoster.encrypt.DTOs.CreateUserRequest;
+import dev.thiagokoster.encrypt.DTOs.UserResponse;
+import dev.thiagokoster.encrypt.Repositories.UserRepository;
+import dev.thiagokoster.encrypt.Exceptions.InvalidUserException;
+import dev.thiagokoster.encrypt.Models.User;
+import dev.thiagokoster.encrypt.Mappers.UserMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +19,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public UserResponseDTO createUser(CreateUserRequestDTO request) {
+    public UserResponse createUser(CreateUserRequest request) {
         String hashedPassword = hashPassword(request.password());
         User user = new User(request.username(), request.email(), hashedPassword);
         try {

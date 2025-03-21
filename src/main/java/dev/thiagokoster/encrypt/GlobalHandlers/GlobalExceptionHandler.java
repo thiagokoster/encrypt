@@ -1,6 +1,7 @@
 package dev.thiagokoster.encrypt.GlobalHandlers;
 
-import dev.thiagokoster.encrypt.User.InvalidUserException;
+import dev.thiagokoster.encrypt.DTOs.ErrorResponse;
+import dev.thiagokoster.encrypt.Exceptions.InvalidUserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

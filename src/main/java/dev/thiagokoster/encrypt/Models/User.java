@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.User;
+package dev.thiagokoster.encrypt.Models;
 
 import jakarta.persistence.*;
 
