@@ -6,5 +6,5 @@ Accept: application/json
 {
   "username": "foo",
   "email": "bar",
-  "password": "123456"
+  "password": "1234"
 }

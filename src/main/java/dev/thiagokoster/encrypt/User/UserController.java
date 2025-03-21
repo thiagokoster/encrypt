@@ -1,23 +1,23 @@
 package dev.thiagokoster.encrypt.User;
 
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+// TODO: Separate classes into Controllers, Services, ...
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponseDTO createUser(@RequestBody CreateUserRequestDTO request){
-        var user = userService.createUser(request);
-        return user;
+    public UserResponseDTO createUser(@Valid @RequestBody CreateUserRequestDTO request){
+        return userService.createUser(request);
     }
 }

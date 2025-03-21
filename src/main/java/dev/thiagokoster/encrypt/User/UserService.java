@@ -1,8 +1,9 @@
 package dev.thiagokoster.encrypt.User;
 
-import com.password4j.Hash;
 import com.password4j.Password;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class UserService {
@@ -13,10 +14,18 @@ public class UserService {
     }
 
     public UserResponseDTO createUser(CreateUserRequestDTO request) {
-        var hashedPassword = hashPassword(request.password());
-        var user = new User(request.username(), request.email(), hashedPassword);
+        String hashedPassword = hashPassword(request.password());
+        User user = new User(request.username(), request.email(), hashedPassword);
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            if (e.getMessage().contains("users_username_key")) {
+                throw new InvalidUserException(String.format("Username '%s' already exists", request.username()));
+            } else if (e.getMessage().contains("users_email_key")) {
+                throw new InvalidUserException(String.format("Email '%s' already in use", request.email()));
+            }
+        }
 
-        userRepository.save(user);
 
         return UserMapper.toDTO(user);
     }
