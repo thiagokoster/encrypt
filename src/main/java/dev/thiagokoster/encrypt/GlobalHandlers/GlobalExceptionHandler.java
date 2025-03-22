@@ -1,6 +1,7 @@
 package dev.thiagokoster.encrypt.GlobalHandlers;
 
 import dev.thiagokoster.encrypt.DTOs.ErrorResponse;
+import dev.thiagokoster.encrypt.Exceptions.AuthenticationFailedException;
 import dev.thiagokoster.encrypt.Exceptions.InvalidUserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +26,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleInvalidUserException(InvalidUserException ex) {
         String[] errors = new String[]{ex.getMessage()};
         return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(AuthenticationFailedException.class)
+    public ResponseEntity<ErrorResponse> handleAuthenticationFailedException(AuthenticationFailedException ex) {
+        String[] errors = new String[] { ex.getMessage() };
+        return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.UNAUTHORIZED);
     }
 }
