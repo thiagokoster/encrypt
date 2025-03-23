@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.services.AuthService;
+package dev.thiagokoster.encrypt.services.AuthServiceTest;
 
 import dev.thiagokoster.encrypt.dtos.LoginRequest;
 import dev.thiagokoster.encrypt.exceptions.AuthenticationFailedException;

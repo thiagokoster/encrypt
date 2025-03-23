@@ -6,6 +6,9 @@ import dev.thiagokoster.encrypt.dtos.LoginResponse;
 import dev.thiagokoster.encrypt.exceptions.AuthenticationFailedException;
 import dev.thiagokoster.encrypt.models.User;
 import dev.thiagokoster.encrypt.repositories.UserRepository;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
@@ -48,6 +51,14 @@ public class AuthService {
 
         Instant expiry = now.plusMillis(jwtProperties.expiration());
         return new LoginResponse(Timestamp.from(expiry), jwt);
+    }
+
+    public Claims authenticate(String token) {
+        SecretKey key = Keys.hmacShaKeyFor(jwtProperties.secret()
+                .getBytes(StandardCharsets.UTF_8));
+        JwtParser parser =  Jwts.parser().verifyWith(key).build();
+        Jws<Claims> jws = parser.parseSignedClaims(token);
+        return jws.getPayload();
     }
 
     private String generateToken(Instant now, String subject) {
