@@ -1,5 +1,10 @@
 package dev.thiagokoster.encrypt.filters;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.thiagokoster.encrypt.dtos.ErrorResponse;
+import dev.thiagokoster.encrypt.exceptions.InvalidUserException;
+import dev.thiagokoster.encrypt.models.User;
+import dev.thiagokoster.encrypt.repositories.UserRepository;
 import dev.thiagokoster.encrypt.services.AuthService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -9,7 +14,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,9 +24,12 @@ import java.util.UUID;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final AuthService authService;
+    private final UserRepository userRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public JwtAuthenticationFilter(AuthService authService) {
+    public JwtAuthenticationFilter(AuthService authService, UserRepository userRepository) {
         this.authService = authService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -36,21 +43,33 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+
         String token = authHeader.substring(7);
+
         try {
             Claims claims = authService.authenticate(token);
             UUID userId = UUID.fromString(claims.getSubject());
+
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new InvalidUserException("User not found"));
+
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                    userId, null, List.of()
+                    user, null, List.of()
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             filterChain.doFilter(request, response);
-        } catch (JwtException | IllegalArgumentException e) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Invalid token subject (expected UUID)");
-            return;
+        } catch (JwtException | IllegalArgumentException | InvalidUserException e) {
+            writeUnauthorized(response);
         }
+    }
 
+    private void writeUnauthorized(HttpServletResponse response) throws IOException {
+        ErrorResponse errorResponse = new ErrorResponse(new String[] {"Invalid or expired token"});
+        String json = objectMapper.writeValueAsString(errorResponse);
+
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write(json);
     }
 }
