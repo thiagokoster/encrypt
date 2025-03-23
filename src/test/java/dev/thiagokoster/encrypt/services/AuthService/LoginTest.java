@@ -1,11 +1,11 @@
 package dev.thiagokoster.encrypt.services.AuthService;
 
-import dev.thiagokoster.encrypt.DTOs.LoginRequest;
-import dev.thiagokoster.encrypt.Exceptions.AuthenticationFailedException;
-import dev.thiagokoster.encrypt.Models.User;
-import dev.thiagokoster.encrypt.Repositories.UserRepository;
-import dev.thiagokoster.encrypt.Services.AuthService;
-import dev.thiagokoster.encrypt.Services.CryptoService;
+import dev.thiagokoster.encrypt.dtos.LoginRequest;
+import dev.thiagokoster.encrypt.exceptions.AuthenticationFailedException;
+import dev.thiagokoster.encrypt.models.User;
+import dev.thiagokoster.encrypt.repositories.UserRepository;
+import dev.thiagokoster.encrypt.services.AuthService;
+import dev.thiagokoster.encrypt.services.CryptoService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

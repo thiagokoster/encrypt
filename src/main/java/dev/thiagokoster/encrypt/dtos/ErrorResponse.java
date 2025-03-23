@@ -1,3 +1,3 @@
-package dev.thiagokoster.encrypt.DTOs;
+package dev.thiagokoster.encrypt.dtos;
 
 public record ErrorResponse(String[] errors) {}

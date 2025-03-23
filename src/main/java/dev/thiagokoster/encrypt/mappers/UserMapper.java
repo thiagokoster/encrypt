@@ -1,7 +1,7 @@
-package dev.thiagokoster.encrypt.Mappers;
+package dev.thiagokoster.encrypt.mappers;
 
-import dev.thiagokoster.encrypt.DTOs.UserResponse;
-import dev.thiagokoster.encrypt.Models.User;
+import dev.thiagokoster.encrypt.dtos.UserResponse;
+import dev.thiagokoster.encrypt.models.User;
 
 public class UserMapper {
     public static UserResponse toDTO(User user) {

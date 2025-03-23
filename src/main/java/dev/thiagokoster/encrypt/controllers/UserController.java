@@ -1,8 +1,8 @@
-package dev.thiagokoster.encrypt.Controllers;
+package dev.thiagokoster.encrypt.controllers;
 
-import dev.thiagokoster.encrypt.DTOs.CreateUserRequest;
-import dev.thiagokoster.encrypt.DTOs.UserResponse;
-import dev.thiagokoster.encrypt.Services.UserService;
+import dev.thiagokoster.encrypt.dtos.CreateUserRequest;
+import dev.thiagokoster.encrypt.dtos.UserResponse;
+import dev.thiagokoster.encrypt.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.DTOs;
+package dev.thiagokoster.encrypt.dtos;
 
 import java.util.UUID;
 

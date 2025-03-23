@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.Exceptions;
+package dev.thiagokoster.encrypt.exceptions;
 
 public class AuthenticationFailedException extends RuntimeException {
     public AuthenticationFailedException(String message) {

@@ -1,8 +1,8 @@
-package dev.thiagokoster.encrypt.Controllers;
+package dev.thiagokoster.encrypt.controllers;
 
-import dev.thiagokoster.encrypt.DTOs.LoginRequest;
-import dev.thiagokoster.encrypt.DTOs.LoginResponse;
-import dev.thiagokoster.encrypt.Services.AuthService;
+import dev.thiagokoster.encrypt.dtos.LoginRequest;
+import dev.thiagokoster.encrypt.dtos.LoginResponse;
+import dev.thiagokoster.encrypt.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

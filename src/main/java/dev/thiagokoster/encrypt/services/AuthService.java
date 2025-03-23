@@ -1,11 +1,11 @@
-package dev.thiagokoster.encrypt.Services;
+package dev.thiagokoster.encrypt.services;
 
-import dev.thiagokoster.encrypt.Configurations.JwtProperties;
-import dev.thiagokoster.encrypt.DTOs.LoginRequest;
-import dev.thiagokoster.encrypt.DTOs.LoginResponse;
-import dev.thiagokoster.encrypt.Exceptions.AuthenticationFailedException;
-import dev.thiagokoster.encrypt.Models.User;
-import dev.thiagokoster.encrypt.Repositories.UserRepository;
+import dev.thiagokoster.encrypt.configurations.JwtProperties;
+import dev.thiagokoster.encrypt.dtos.LoginRequest;
+import dev.thiagokoster.encrypt.dtos.LoginResponse;
+import dev.thiagokoster.encrypt.exceptions.AuthenticationFailedException;
+import dev.thiagokoster.encrypt.models.User;
+import dev.thiagokoster.encrypt.repositories.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;

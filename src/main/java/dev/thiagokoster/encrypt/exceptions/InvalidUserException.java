@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.Exceptions;
+package dev.thiagokoster.encrypt.exceptions;
 
 public class InvalidUserException extends RuntimeException {
     public InvalidUserException(String message) {

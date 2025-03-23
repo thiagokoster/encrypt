@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.Services;
+package dev.thiagokoster.encrypt.services;
 
 import com.password4j.Password;
 import org.springframework.stereotype.Service;

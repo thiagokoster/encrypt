@@ -1,11 +1,9 @@
 package dev.thiagokoster.encrypt;
 
-import dev.thiagokoster.encrypt.Configurations.JwtProperties;
+import dev.thiagokoster.encrypt.configurations.JwtProperties;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @EnableConfigurationProperties(JwtProperties.class)

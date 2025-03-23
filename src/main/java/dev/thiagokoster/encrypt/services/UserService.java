@@ -1,11 +1,11 @@
-package dev.thiagokoster.encrypt.Services;
+package dev.thiagokoster.encrypt.services;
 
-import dev.thiagokoster.encrypt.DTOs.CreateUserRequest;
-import dev.thiagokoster.encrypt.DTOs.UserResponse;
-import dev.thiagokoster.encrypt.Repositories.UserRepository;
-import dev.thiagokoster.encrypt.Exceptions.InvalidUserException;
-import dev.thiagokoster.encrypt.Models.User;
-import dev.thiagokoster.encrypt.Mappers.UserMapper;
+import dev.thiagokoster.encrypt.dtos.CreateUserRequest;
+import dev.thiagokoster.encrypt.dtos.UserResponse;
+import dev.thiagokoster.encrypt.repositories.UserRepository;
+import dev.thiagokoster.encrypt.exceptions.InvalidUserException;
+import dev.thiagokoster.encrypt.models.User;
+import dev.thiagokoster.encrypt.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

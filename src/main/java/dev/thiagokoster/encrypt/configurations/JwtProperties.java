@@ -1,4 +1,4 @@
-package dev.thiagokoster.encrypt.Configurations;
+package dev.thiagokoster.encrypt.configurations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

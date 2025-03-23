@@ -1,6 +1,6 @@
-package dev.thiagokoster.encrypt.Repositories;
+package dev.thiagokoster.encrypt.repositories;
 
-import dev.thiagokoster.encrypt.Models.User;
+import dev.thiagokoster.encrypt.models.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
