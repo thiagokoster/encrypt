@@ -10,6 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/vaults")
@@ -21,9 +23,18 @@ public class VaultController {
     }
 
     @GetMapping
-    public String index(
+    public ResponseEntity<List<VaultResponse>> getAll(
             @AuthenticationPrincipal User user){
-       return "Greetings from Spring Boot " + user.getId();
+        List<VaultResponse> vaults = vaultService.getAll(user);
+       return ResponseEntity.ok(vaults);
+    }
+
+    @GetMapping("/{vaultId}")
+    public ResponseEntity<VaultResponse> get(
+            @AuthenticationPrincipal User user,
+            @PathVariable("vaultId") UUID vaultId){
+        VaultResponse response = vaultService.getById(user, vaultId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping

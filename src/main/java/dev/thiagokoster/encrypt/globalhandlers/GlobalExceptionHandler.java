@@ -3,6 +3,7 @@ package dev.thiagokoster.encrypt.globalhandlers;
 import dev.thiagokoster.encrypt.dtos.ErrorResponse;
 import dev.thiagokoster.encrypt.exceptions.AuthenticationFailedException;
 import dev.thiagokoster.encrypt.exceptions.InvalidUserException;
+import dev.thiagokoster.encrypt.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,5 +33,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleAuthenticationFailedException(AuthenticationFailedException ex) {
         String[] errors = new String[] { ex.getMessage() };
         return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(ResourceNotFoundException ex) {
+        String[] errors = new String[] { ex.getMessage() };
+        return new ResponseEntity<>(new ErrorResponse(errors), HttpStatus.NOT_FOUND);
     }
 }
