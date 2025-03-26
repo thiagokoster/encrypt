@@ -3,6 +3,7 @@ package dev.thiagokoster.encrypt.controllers;
 import dev.thiagokoster.encrypt.dtos.CreateVaultRequest;
 import dev.thiagokoster.encrypt.dtos.VaultResponse;
 import dev.thiagokoster.encrypt.models.User;
+import dev.thiagokoster.encrypt.models.Vault;
 import dev.thiagokoster.encrypt.services.VaultService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,13 @@ public class VaultController {
     public ResponseEntity<VaultResponse> get(
             @AuthenticationPrincipal User user,
             @PathVariable("vaultId") UUID vaultId){
-        VaultResponse response = vaultService.getById(user, vaultId);
+        //TODO: I don't want Models in my controllers,
+        // create an Facade layer that works as a glue between controllers and services
+        Vault vault = vaultService.getById(user, vaultId);
+        VaultResponse response = new VaultResponse(
+                vault.getId(),
+                vault.getName(),
+                vault.getDescription());
         return ResponseEntity.ok(response);
     }
 

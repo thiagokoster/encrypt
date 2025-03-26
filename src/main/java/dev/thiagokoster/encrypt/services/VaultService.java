@@ -34,16 +34,14 @@ public class VaultService {
                 vault.getDescription());
     }
 
-    public VaultResponse getById(User user, UUID vaultId) {
+    public Vault getById(User user, UUID vaultId) {
         Optional<Vault> vaultOpt = vaultRepository.findByIdAndUserId(vaultId, user.getId());
 
         if (vaultOpt.isEmpty()) {
             throw new ResourceNotFoundException(String.format("Vault '%s' not found", vaultId));
         }
 
-        Vault vault = vaultOpt.get();
-
-        return new VaultResponse(vault.getId(), vault.getName(), vault.getDescription());
+        return vaultOpt.get();
     }
 
     public List<VaultResponse> getAll(User user) {
